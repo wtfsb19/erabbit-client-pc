@@ -1,8 +1,8 @@
 import { defineStore } from 'pinia'
-import { ref } from 'vue'
+import { reactive } from 'vue'
 
 export const useUserStore = defineStore('user', () => {
-  const userInfo = ref({
+  const userInfo = reactive({
     // 用户信息
     profile: {
       id: '',
@@ -16,7 +16,7 @@ export const useUserStore = defineStore('user', () => {
 
   // 修改用户信息，payload就是用户信息对象
   const setUserInfo = (payload) => {
-    userInfo.value.profile = payload
+    userInfo.profile = payload
   }
 
   return {

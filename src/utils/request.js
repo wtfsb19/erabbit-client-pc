@@ -4,7 +4,8 @@
 // 4. 导出一个函数，调用当前的axsio实例发请求，返回值promise
 import axios from 'axios'
 import { useUserStore } from '@/store/userStore'
-import { useRoute, useRouter } from 'vue-router'
+import router from '@/router'
+
 
 // 导出基准地址，原因：其他地方不是通过axios发请求的地方用上基准地址
 export const baseURL = 'http://pcapi-xiaotuxian-front-devtest.itheima.net/'
@@ -12,7 +13,7 @@ export const baseURL = 'http://pcapi-xiaotuxian-front-devtest.itheima.net/'
 const instance = axios.create({
   // axios 的一些配置，baseURL  timeout
   baseURL,
-  timeout: 5000
+  timeout: 10000
 })
 
 // 请求拦截器
@@ -21,7 +22,8 @@ instance.interceptors.request.use(config => {
   // 1. 获取用户信息对象
   const userStore = useUserStore()
   // 2. 判断是否有token
-  const token = userStore.userInfo.value.profile.token
+  const token = userStore.userInfo.profile.token
+  console.log(token)
   if (token) {
     config.headers.Authorization = `Bearer ${token}`
   }
@@ -35,8 +37,6 @@ instance.interceptors.request.use(config => {
 // 响应拦截器
 instance.interceptors.response.use(res => res.data, err => {
   // 拦截 401 错误，需要重新登录
-  const route = useRoute()
-  const router = useRouter()
   const userStore = useUserStore()
   if (err.response && err.response.status === 401) {
     // 1. 清空无效用户信息
@@ -44,9 +44,9 @@ instance.interceptors.response.use(res => res.data, err => {
     // 3. 跳转需要传参（当前路由地址）给登录页码
     userStore.setUserInfo({})
     // 获取当前路由
-    const fullPath = encodeURIComponent(route.fullPath) // encodeURIComponent 转换uri编码，防止解析地址出问题
+    // console.log(router.currentRoute.value.fullPath)
+    const fullPath = encodeURIComponent(router.currentRoute.value.fullPath) // encodeURIComponent 转换uri编码，防止解析地址出问题
     router.push(`/login?redirectUrl=${fullPath}`)
-
   }
   // 失败的回调函数，处理请求失败，比如token失效，网络不通或者请求超时等情况，统一做处理
   return Promise.reject(err)
