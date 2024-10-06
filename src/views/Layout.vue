@@ -1,0 +1,21 @@
+<script>
+export default {
+  name: 'xtx-layout'
+}
+</script>
+
+<template>
+  <div>
+    <nav>顶部通栏</nav>
+    <header>头部</header>
+    <main>
+      <!-- 二级路由 -->
+      <router-view></router-view>
+    </main>
+    <footer>底部</footer>
+  </div>
+</template>
+
+<style scoped lang="less">
+
+</style>
