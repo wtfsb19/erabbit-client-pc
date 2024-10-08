@@ -1,17 +1,19 @@
 <script>
-import topnav from '@/components/topnav.vue'
+import AppTopnav from '@/components/app-topnav.vue'
+import AppHeader from '@/components/app-header.vue'
 export default {
   name: 'xtx-layout',
   components: {
-    topnav
+    AppTopnav,
+    AppHeader
   }
 }
 </script>
 
 <template>
   <div>
-    <topnav></topnav>
-    <header>头部</header>
+    <AppTopnav></AppTopnav>
+    <AppHeader>头部</AppHeader>
     <main>
       <!-- 二级路由 -->
       <router-view></router-view>
