@@ -1,12 +1,16 @@
 <script>
+import topnav from '@/components/topnav.vue'
 export default {
-  name: 'xtx-layout'
+  name: 'xtx-layout',
+  components: {
+    topnav
+  }
 }
 </script>
 
 <template>
   <div>
-    <nav>顶部通栏</nav>
+    <topnav></topnav>
     <header>头部</header>
     <main>
       <!-- 二级路由 -->
