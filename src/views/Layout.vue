@@ -1,11 +1,13 @@
 <script>
 import AppTopnav from '@/components/app-topnav.vue'
 import AppHeader from '@/components/app-header.vue'
+import AppFooter from '@/components/app-footer.vue'
 export default {
   name: 'xtx-layout',
   components: {
     AppTopnav,
-    AppHeader
+    AppHeader,
+    AppFooter
   }
 }
 </script>
@@ -13,15 +15,17 @@ export default {
 <template>
   <div>
     <AppTopnav></AppTopnav>
-    <AppHeader>头部</AppHeader>
-    <main>
+    <AppHeader></AppHeader>
+    <main class="app-body">
       <!-- 二级路由 -->
       <router-view></router-view>
     </main>
-    <footer>底部</footer>
+    <AppFooter>底部</AppFooter>
   </div>
 </template>
 
 <style scoped lang="less">
-
+.app-body {
+  min-height: 600px;
+}
 </style>
