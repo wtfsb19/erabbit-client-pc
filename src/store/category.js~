@@ -3,13 +3,13 @@ import { ref } from 'vue'
 import { topCategoryList } from '@/api/constants'
 import { getCategoryData } from '@/api/category'
 // 分类模块
-export const useCategoryStore = defineStore('category', () => {
+export default defineStore('category', () => {
   const categoryList = ref(topCategoryList)
 
-  // 获取分类列表并更新默认数据
+  // 定义获取分类列表的函数
   const getCategoryList = async () => {
     const res = await getCategoryData()
-    categoryList.value = res.result
+    categoryList.value = res.data.list
   }
 
 

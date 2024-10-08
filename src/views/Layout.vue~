@@ -9,7 +9,7 @@ export default {
   name: 'xtx-layout',
   setup () {
     const categoryStore = useCategoryStore()
-    // layout 组件渲染完成后执行，获取分类数据，以便其他子组件使用
+    //
     categoryStore.getCategoryList()
   },
   components: {
