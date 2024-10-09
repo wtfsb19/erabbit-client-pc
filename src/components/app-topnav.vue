@@ -24,7 +24,7 @@ import { useUserStore } from '@/store/userStore'
 import { computed } from 'vue'
 
 export default {
-  name: 'AppTopnav',
+  name: 'AppTopNav',
   setup () {
     // 获取用户信息用于切换菜单
     const userStore = useUserStore()

@@ -1,12 +1,15 @@
 <template>
   <ul class="app-header-nav">
-    <li class="home"><RouterLink to="/">首页</RouterLink></li>
-    <li v-for="item in categoryStore.categoryList" :key="item.id">
-      <router-link to="/">{{item.name}}</router-link>
-      <div class="layer">
+    <li class="home">
+      <RouterLink :to="{name: 'home'}">首页</RouterLink>
+    </li>
+    <li v-for="item in categoryStore.categoryList" :key="item.id" @mouseenter="categoryStore.show(item.id)"
+        @mouseleave="categoryStore.hide(item.id)">
+      <router-link @click="categoryStore.hide(item.id)" :to="`/category/${item.id}`">{{ item.name }}</router-link>
+      <div class="layer" :class="{open: item.open}">
         <ul>
           <li v-for="sub in item.children" :key="sub.id">
-            <router-link to="/">
+            <router-link @click="categoryStore.hide(item.id)" :to="`/category/sub/${sub.id}`">
               <img :src="sub.picture" alt="">
               <p>{{ sub.name }}</p>
             </router-link>
@@ -19,6 +22,7 @@
 
 <script>
 import { useCategoryStore } from '@/store/category'
+
 export default {
   name: 'AppHeaderNav',
   setup () {
@@ -45,25 +49,35 @@ export default {
     margin-right: 40px;
     width: 38px;
     text-align: center;
+
     > a {
       font-size: 16px;
       line-height: 32px;
       height: 32px;
       display: inline-block;
     }
+
     &:hover {
       > a {
         color: @xtxColor;
         border-bottom: 1px solid @xtxColor;
       }
-      > .layer {
-        height: 132px;
-        opacity: 1;
-      }
+
+      //> .layer {
+      //  height: 132px;
+      //  opacity: 1;
+      //}
     }
   }
 }
+
 .layer {
+  // 当open为true的时候，设置高度和透明度，展示二级分类
+  &.open {
+    height: 132px;
+    opacity: 1;
+  }
+
   width: 1240px;
   background-color: #fff;
   position: absolute;
@@ -74,22 +88,27 @@ export default {
   opacity: 0;
   box-shadow: 0 0 5px #ccc;
   transition: all .2s .1s;
+
   ul {
     display: flex;
     flex-wrap: wrap;
     padding: 0 70px;
     align-items: center;
     height: 132px;
+
     li {
       width: 110px;
       text-align: center;
+
       img {
         width: 60px;
         height: 60px;
       }
+
       p {
         padding-top: 10px;
       }
+
       &:hover {
         p {
           color: @xtxColor;

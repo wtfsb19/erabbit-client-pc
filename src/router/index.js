@@ -7,7 +7,18 @@ const routes = [
     children: [
       {
         path: '/',
+        name: "home",
         component: () => import("@/views/home/index.vue")
+      },
+      {
+        path: '/category/:id',
+        name: "category",
+        component: () => import("@/views/category")
+      },
+      {
+        path: '/category/sub/:id',
+        name: "subcategory",
+        component: () => import("@/views/category/sub.vue")
       }
     ]
   }
