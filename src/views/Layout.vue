@@ -2,6 +2,7 @@
 import AppTopNav from '@/components/app-topnav.vue'
 import AppHeader from '@/components/app-header.vue'
 import AppFooter from '@/components/app-footer.vue'
+import AppHeaderSticky from '@/components/app-header-sticky.vue'
 import { useCategoryStore } from '@/store/category'
 
 
@@ -15,7 +16,8 @@ export default {
   components: {
     AppTopNav,
     AppHeader,
-    AppFooter
+    AppFooter,
+    AppHeaderSticky
   }
 }
 </script>
@@ -24,6 +26,7 @@ export default {
   <div>
     <AppTopNav></AppTopNav>
     <AppHeader></AppHeader>
+    <AppHeaderSticky></AppHeaderSticky>
     <main class="app-body">
       <!-- 二级路由 -->
       <router-view></router-view>
