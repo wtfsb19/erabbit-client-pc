@@ -1,18 +1,18 @@
-<script>
-export default {
-  name: 'xtx-home-page'
-}
-</script>
-
 <template>
-<div class='xtx-home-page'>
-    首页
+  <div class="page-home">
+    <div class="home-entry">
+      <div class="container">
+        <!-- 左侧分类 -->
+        <HomeCategory />
+      </div>
+    </div>
   </div>
 </template>
-
-<style scoped lang="less">
-.xtx-home-page {
-  .hoverShadow();
-  color: @xtxColor;
+<script>
+import HomeCategory from './components/home-category'
+export default {
+  name: 'PageHome',
+  components: { HomeCategory }
 }
-</style>
+</script>
+<style scoped lang="less"></style>
