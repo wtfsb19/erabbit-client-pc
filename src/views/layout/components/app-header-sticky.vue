@@ -1,18 +1,18 @@
 <template>
   <div class="app-header-sticky" :class="{show:y>=78}">
     <div class="container" v-show="y>=78">
-      <RouterLink class="logo" to="/"/>
+      <RouterLink class="logo" to="/public"/>
       <AppHeaderNav/>
       <div class="right">
-        <RouterLink to="/">品牌</RouterLink>
-        <RouterLink to="/">专题</RouterLink>
+        <RouterLink to="/public">品牌</RouterLink>
+        <RouterLink to="/public">专题</RouterLink>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import AppHeaderNav from './app-header-nav'
+import AppHeaderNav from './app-header-nav.vue'
 import { useWindowScroll } from '@vueuse/core'
 
 export default {
@@ -52,7 +52,7 @@ export default {
   .logo {
     width: 200px;
     height: 80px;
-    background: url(../assets/images/logo.png) no-repeat right 2px;
+    background: url(../../../assets/images/logo.png) no-repeat right 2px;
     background-size: 160px auto;
   }
 

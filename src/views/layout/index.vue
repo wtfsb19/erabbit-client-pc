@@ -1,8 +1,8 @@
 <script>
-import AppTopNav from '@/components/app-topnav.vue'
-import AppHeader from '@/components/app-header.vue'
-import AppFooter from '@/components/app-footer.vue'
-import AppHeaderSticky from '@/components/app-header-sticky.vue'
+import AppTopNav from '@/views/layout/components/app-topnav.vue'
+import AppHeader from '@/views/layout/components/app-header.vue'
+import AppFooter from '@/views/layout/components/app-footer.vue'
+import AppHeaderSticky from '@/views/layout/components/app-header-sticky.vue'
 import { useCategoryStore } from '@/store/category'
 
 

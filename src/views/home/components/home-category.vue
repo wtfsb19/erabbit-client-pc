@@ -1,7 +1,8 @@
 <template>
   <div class='home-category' @mouseleave="currentId = null">
-    <ul class="menu" >
-      <li v-for="item in menuList" :key="item.id" @mouseenter="currentId = item.id" :class="{active:currentId===item.id}">
+    <ul class="menu">
+      <li v-for="item in menuList" :key="item.id" @mouseenter="currentId = item.id"
+          :class="{active:currentId===item.id}">
         <RouterLink :to="`/category/${item.id}`">{{ item.name }}</RouterLink>
         <!-- 二级菜单(由于初始数据无children，直接遍历会报错) -->
         <template v-if="item.children">
@@ -12,11 +13,17 @@
             {{ sub.name }}
           </RouterLink>
         </template>
+        <template v-else>
+          <!-- 骨架屏 -->
+          <XtxSkeleton width="60px" height="18px" style="margin-right:5px" bg="rgba(255,255,255,0.2)"/>
+          <XtxSkeleton width="50px" height="18px" bg="rgba(255,255,255,0.2)"/>
+        </template>
       </li>
     </ul>
     <!-- 弹层 -->
     <div class="layer">
-      <h4 v-if="currentCategory">{{ currentCategory.id === 'brand' ? '品牌' : '分类' }}推荐 <small>根据您的购买或浏览记录推荐</small></h4>
+      <h4 v-if="currentCategory">{{ currentCategory.id === 'brand' ? '品牌' : '分类' }}推荐
+        <small>根据您的购买或浏览记录推荐</small></h4>
       <!-- 获取数据后进行渲染，且当有数据时才渲染 -->
       <ul v-if="currentCategory && currentCategory.goods && currentCategory.goods.length">
         <li v-for="item in currentCategory.goods" :key="item.id">
@@ -36,8 +43,8 @@
           <RouterLink to="/">
             <img :src="item.picture" alt="">
             <div class="info">
-              <p class="place"><i class="iconfont icon-dingwei"></i>{{ item.place}}</p>
-              <p class="name ellipsis">{{item.name}}</p>
+              <p class="place"><i class="iconfont icon-dingwei"></i>{{ item.place }}</p>
+              <p class="name ellipsis">{{ item.name }}</p>
               <p class="desc ellipsis-2">{{ item.desc }}</p>
             </div>
           </RouterLink>
@@ -250,6 +257,19 @@ export default {
     .layer {
       display: block;
     }
+  }
+}
+
+.xtx-skeleton {
+  animation: fade 1s linear infinite alternate;
+}
+
+@keyframes fade {
+  from {
+    opacity: 0.2;
+  }
+  to {
+    opacity: 1;
   }
 }
 </style>
