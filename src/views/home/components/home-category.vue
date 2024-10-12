@@ -1,7 +1,7 @@
 <template>
-  <div class='home-category'>
-    <ul class="menu">
-      <li v-for="item in menuList" :key="item.id" @mouseenter="currentId = item.id">
+  <div class='home-category' @mouseleave="currentId = null">
+    <ul class="menu" >
+      <li v-for="item in menuList" :key="item.id" @mouseenter="currentId = item.id" :class="{active:currentId===item.id}">
         <RouterLink :to="`/category/${item.id}`">{{ item.name }}</RouterLink>
         <!-- 二级菜单(由于初始数据无children，直接遍历会报错) -->
         <template v-if="item.children">
@@ -124,7 +124,7 @@ export default {
       height: 50px;
       line-height: 50px;
 
-      &:hover {
+      &:hover, &.active {
         background: @xtxColor;
       }
 
