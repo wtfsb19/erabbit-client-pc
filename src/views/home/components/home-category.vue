@@ -16,16 +16,29 @@
     </ul>
     <!-- 弹层 -->
     <div class="layer">
-      <h4>分类推荐 <small>根据您的购买或浏览记录推荐</small></h4>
+      <h4 v-if="currentCategory">{{ currentCategory.id === 'brand' ? '品牌' : '分类' }}推荐 <small>根据您的购买或浏览记录推荐</small></h4>
       <!-- 获取数据后进行渲染，且当有数据时才渲染 -->
       <ul v-if="currentCategory && currentCategory.goods && currentCategory.goods.length">
         <li v-for="item in currentCategory.goods" :key="item.id">
           <RouterLink to="/">
             <img :src="item.picture" alt="">
             <div class="info">
-              <p class="name ellipsis-2">{{item.name}}</p>
-              <p class="desc ellipsis">{{item.desc}}</p>
-              <p class="price"><i>¥</i>{{item.price}}</p>
+              <p class="name ellipsis-2">{{ item.name }}</p>
+              <p class="desc ellipsis">{{ item.desc }}</p>
+              <p class="price"><i>¥</i>{{ item.price }}</p>
+            </div>
+          </RouterLink>
+        </li>
+      </ul>
+      <!-- 品牌 -->
+      <ul v-if="currentCategory && currentCategory.brands && currentCategory.brands.length">
+        <li class="brand" v-for="item in currentCategory.brands" :key="item.id">
+          <RouterLink to="/">
+            <img :src="item.picture" alt="">
+            <div class="info">
+              <p class="place"><i class="iconfont icon-dingwei"></i>{{ item.place}}</p>
+              <p class="name ellipsis">{{item.name}}</p>
+              <p class="desc ellipsis-2">{{ item.desc }}</p>
             </div>
           </RouterLink>
         </li>
@@ -36,7 +49,8 @@
 
 <script>
 import { useCategoryStore } from '@/store/category'
-import { computed, reactive, ref } from 'vue'
+import { computed, reactive, ref, onMounted } from 'vue'
+import { findBrand } from '@/api/home'
 
 export default {
   name: 'HomeCategory',
@@ -51,7 +65,8 @@ export default {
       children: [{
         id: 'brand-chilren',
         name: '品牌推荐'
-      }]
+      }],
+      brands: []
     })
     // 取出store中的数据
     const categoryStore = useCategoryStore()
@@ -69,13 +84,22 @@ export default {
       return list
     })
 
-
     // 获取当前分类ID
     const currentId = ref(null)
     // 根据ID获取对应的分类
     const currentCategory = computed(() => {
-      return categoryStore.categoryList.find(item => item.id === currentId.value)
-})
+      return menuList.value.find(item => item.id === currentId.value)
+    })
+    // 获取首页品牌数据
+    // findBrand(10).then(res => {
+    //   brand.brands = res.result
+    // })
+
+    onMounted(async () => {
+      const res = await findBrand(6)
+      brand.brands = res.result
+      console.log(brand.brands)
+    })
 
     return {
       currentId,
@@ -115,6 +139,7 @@ export default {
     }
   }
 
+
   .layer {
     width: 990px;
     height: 500px;
@@ -153,6 +178,7 @@ export default {
           margin-right: 0;
         }
 
+
         a {
           display: flex;
           width: 100%;
@@ -190,6 +216,29 @@ export default {
               i {
                 font-size: 16px;
               }
+            }
+          }
+        }
+      }
+
+      li.brand {
+        height: 180px;
+
+        a {
+          align-items: flex-start;
+
+          img {
+            width: 120px;
+            height: 160px;
+          }
+
+          .info {
+            p {
+              margin-top: 8px;
+            }
+
+            .place {
+              color: #999;
             }
           }
         }

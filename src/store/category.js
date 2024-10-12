@@ -2,7 +2,7 @@ import { defineStore } from 'pinia'
 import { ref } from 'vue'
 import { topCategoryList } from '@/api/constants'
 import { getCategoryData } from '@/api/category'
-// 分类模块
+// 存储的分类数据
 export const useCategoryStore = defineStore('category', () => {
   const categoryList = ref(topCategoryList)
 

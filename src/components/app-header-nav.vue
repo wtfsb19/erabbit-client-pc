@@ -27,8 +27,6 @@ export default {
   name: 'AppHeaderNav',
   setup () {
     const categoryStore = useCategoryStore()
-    //
-
     return {
       categoryStore
     }

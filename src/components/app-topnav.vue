@@ -31,7 +31,6 @@ export default {
     // 1. 通过storeToRefs方法获取响应式数据
     // const { userInfo: {profile} } = storeToRefs(userStore)
     // 2. 通过computed方法获取响应式数据
-    // 2.通过compute
     const profile = computed(() => userStore.userInfo.profile);
     return {
       profile
