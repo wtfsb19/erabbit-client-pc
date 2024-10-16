@@ -1,5 +1,5 @@
 <template>
-  <div class='xtx-carousel'>
+  <div class='xtx-carousel' @mouseenter="stop" @mouseleave="start">
     <ul class="carousel-body">
       <li class="carousel-item" v-for="(item, i) in sliders" :key="i" :class="{fade: i === index}">
         <RouterLink to="/">
@@ -9,27 +9,94 @@
         </RouterLink>
       </li>
     </ul>
-    <a href="javascript:;" class="carousel-btn prev"><i class="iconfont icon-angle-left"></i></a>
-    <a href="javascript:;" class="carousel-btn next"><i class="iconfont icon-angle-right"></i></a>
+    <a @click="toggle(-1)" href="javascript:;" class="carousel-btn prev"><i class="iconfont icon-angle-left"></i></a>
+    <a @click="toggle(1)" href="javascript:;" class="carousel-btn next"><i class="iconfont icon-angle-right"></i></a>
     <div class="carousel-indicator">
-      <span v-for="(item, i) in sliders" :key="i" :class="{active: i === index}"></span>
+      <span @click="index = i" v-for="(item, i) in sliders" :key="i" :class="{active: i === index}"></span>
     </div>
   </div>
 </template>
 
 <script>
-import { ref } from 'vue'
+import { ref, watch, onUnmounted } from 'vue'
+
 export default {
   name: 'XtxCarousel',
   props: {
     sliders: {
       type: Array,
       default: () => []
+    },
+    autoPlay: {
+      type: Boolean,
+      default: false
+    },
+    duration: {
+      type: Number,
+      default: 3000
     }
   },
-  setup () {
+  setup (props) {
+    // 默认显示的图片的索引
     const index = ref(0)
-    return { index }
+
+    // 1. 自动播放
+    let timer = null
+    const autoPlayFn = () => {
+      // 防止重复设置定时器导致内存泄露
+      clearInterval(timer)
+      timer = setInterval(() => {
+        index.value++
+        if (index.value >= props.sliders.length) {
+          index.value = 0
+        }
+      }, props.duration)
+    }
+    watch(() => props.sliders, (newVal) => {
+      // 有数据 & 开启自动播放，才调用自动播放函数
+      if (newVal.length && props.autoPlay) {
+        index.value = 0
+        autoPlayFn()
+      }
+    }, { immediate: true })
+
+    // 2.鼠标进入停止，移出开启自动，前提条件：autoPlay为true
+    const stop = () => {
+      if (timer) clearInterval(timer)
+    }
+    const start = () => {
+      if (props.sliders.length && props.autoPlay) {
+        autoPlayFn()
+      }
+    }
+
+    // 3.指示器切换，上一张下一张
+    const toggle = (step) => {
+      const newIndex = index.value + step
+      // 边界判断
+      if (newIndex >= props.sliders.length) {
+        index.value = 0
+        return
+      }
+      if (newIndex < 0) {
+        index.value = props.sliders.length - 1
+        return
+      }
+      // 正常范围
+      index.value = newIndex
+    }
+
+    // 4.组件销毁，清理定时器
+    onUnmounted(() => {
+      clearInterval(timer)
+    })
+
+    return {
+      index,
+      stop,
+      start,
+      toggle
+    }
   }
 }
 </script>
