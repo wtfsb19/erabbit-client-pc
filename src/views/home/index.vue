@@ -12,6 +12,8 @@
       <HomeHot></HomeHot>
       <!-- 热门品牌 -->
       <HomeBrand></HomeBrand>
+      <!-- 商品区域 -->
+      <HomeProduct></HomeProduct>
     </div>
   </div>
 </template>
@@ -21,7 +23,7 @@ import HomeBanner from '@/views/home/components/home-banner.vue'
 import HomeNew from '@/views/home/components/home-new.vue'
 import HomeHot from '@/views/home/components/home-hot.vue'
 import HomeBrand from '@/views/home/components/home-brand.vue'
-
+import HomeProduct from '@/views/home/components/home-product.vue'
 export default {
   name: 'PageHome',
   components: {
@@ -29,7 +31,8 @@ export default {
     HomeBanner,
     HomeNew,
     HomeHot,
-    HomeBrand
+    HomeBrand,
+    HomeProduct
   }
 }
 </script>

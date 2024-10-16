@@ -18,8 +18,15 @@ export const useLazyLoad = (apiFn) => {
           result.value = data.result
         })
       }
+    },
+    {
+      // 默认元素一进入就触发，防止元素过大影响加载
+      threshold: 0
     }
   )
   // 返回--->数据（dom,后台数据）
-  return { target, result }
+  return {
+    target,
+    result
+  }
 }
