@@ -6,8 +6,12 @@
         <HomeCategory></HomeCategory>
         <HomeBanner></HomeBanner>
       </div>
+      <!-- 新鲜好物 -->
       <HomeNew></HomeNew>
+      <!-- 人气推荐 -->
       <HomeHot></HomeHot>
+      <!-- 热门品牌 -->
+      <HomeBrand></HomeBrand>
     </div>
   </div>
 </template>
@@ -16,6 +20,7 @@ import HomeCategory from '@/views/home/components/home-category'
 import HomeBanner from '@/views/home/components/home-banner.vue'
 import HomeNew from '@/views/home/components/home-new.vue'
 import HomeHot from '@/views/home/components/home-hot.vue'
+import HomeBrand from '@/views/home/components/home-brand.vue'
 
 export default {
   name: 'PageHome',
@@ -23,7 +28,8 @@ export default {
     HomeCategory,
     HomeBanner,
     HomeNew,
-    HomeHot
+    HomeHot,
+    HomeBrand
   }
 }
 </script>
