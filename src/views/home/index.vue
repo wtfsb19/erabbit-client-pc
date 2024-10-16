@@ -7,6 +7,7 @@
         <HomeBanner></HomeBanner>
       </div>
       <HomeNew></HomeNew>
+      <HomeHot></HomeHot>
     </div>
   </div>
 </template>
@@ -14,13 +15,15 @@
 import HomeCategory from '@/views/home/components/home-category'
 import HomeBanner from '@/views/home/components/home-banner.vue'
 import HomeNew from '@/views/home/components/home-new.vue'
+import HomeHot from '@/views/home/components/home-hot.vue'
 
 export default {
   name: 'PageHome',
   components: {
     HomeCategory,
     HomeBanner,
-    HomeNew
+    HomeNew,
+    HomeHot
   }
 }
 </script>

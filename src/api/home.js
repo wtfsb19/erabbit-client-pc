@@ -1,12 +1,12 @@
 import request from '@/utils/request'
 
 /**
-* 获取首页分类导航中的品牌数据
-* @param {Number} limit
-* @return Promise
-* */
+ * 获取首页分类导航中的品牌数据
+ * @param {Number} limit
+ * @return Promise
+ * */
 export const findBrand = (limit) => {
-  return request('/home/brand', 'get', {limit})
+  return request('/home/brand', 'get', { limit })
 }
 
 /**
@@ -23,4 +23,13 @@ export const findBanner = () => {
  */
 export const findNew = () => {
   return request('/home/new', 'get')
+}
+
+/**
+ * 获取人气推荐数据
+ * @returns {Promise<AxiosResponse<any>> | *}
+ *
+ */
+export const findHot = () => {
+  return request('/home/hot', 'get')
 }
