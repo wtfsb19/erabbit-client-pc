@@ -2,6 +2,7 @@
 
 import XtxSkeleton from '@/components/library/xtx-skeleton.vue'
 import XtxCarousel from '@/components/library/xtx-carousel.vue'
+import XtxMore from '@/components/library/xtx-more.vue'
 
 export const componentPlugin = {
   install (app) {
@@ -11,5 +12,6 @@ export const componentPlugin = {
     // 注册组件
     app.component(XtxSkeleton.name, XtxSkeleton)
     app.component(XtxCarousel.name, XtxCarousel)
+    app.component(XtxMore.name, XtxMore)
   }
 }
