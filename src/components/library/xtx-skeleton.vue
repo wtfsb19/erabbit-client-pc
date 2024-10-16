@@ -2,7 +2,7 @@
   <div class="xtx-skeleton" :style="{width,height}" :class="{shan:animated}">
     <!-- 1 盒子-->
     <div class="block" :style="{backgroundColor:bg}"></div>
-    <!-- 2 闪效果 xtx-skeleton 伪元素 --->
+    <!-- 2 闪效果 xtx-library 伪元素 --->
   </div>
 </template>
 <script>

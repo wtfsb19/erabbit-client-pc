@@ -1,6 +1,7 @@
 // vue3.0插件写法要素：导出一个对象，有install函数，默认传入了app应用实例，app基础之上扩展
 
-import XtxSkeleton from './skeleton/xtx-skeleton.vue'
+import XtxSkeleton from '@/components/library/xtx-skeleton.vue'
+import XtxCarousel from '@/components/library/xtx-carousel.vue'
 
 export const componentPlugin = {
   install (app) {
@@ -9,5 +10,6 @@ export const componentPlugin = {
 
     // 注册组件
     app.component(XtxSkeleton.name, XtxSkeleton)
+    app.component(XtxCarousel.name, XtxCarousel)
   }
 }
