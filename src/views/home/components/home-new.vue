@@ -4,7 +4,7 @@
       <template #right>
         <XtxMore path="/"/>
       </template>
-      <div style="position: relative;height: 426px;">
+      <div ref="target" style="position: relative;height: 426px;">
         <Transition name="fade">
           <!-- 面板内容 -->
           <ul v-if="goods.length" class="goods-list">
@@ -23,10 +23,11 @@
   </div>
 </template>
 <script>
-import { ref, onMounted } from 'vue'
+
 import HomePanel from './home-panel'
 import { findNew } from '@/api/home'
 import HomeSkeleton from '@/views/home/components/home-skeleton.vue'
+import { useLazyLoad } from '@/hooks'
 
 export default {
   name: 'HomeNew',
@@ -35,15 +36,22 @@ export default {
     HomeSkeleton
   },
   setup () {
-    const goods = ref([])
-    const getNewList = async () => {
-      const res = await findNew()
-      goods.value = res.result
+    // const goods = ref([])
+    // const getNewList = async () => {
+    //   const res = await findNew()
+    //   goods.value = res.result
+    // }
+    // onMounted(() => {
+    //   getNewList()
+    // })
+    const {
+      target,
+      result
+    } = useLazyLoad(findNew)
+    return {
+      goods: result,
+      target
     }
-    onMounted(() => {
-      getNewList()
-    })
-    return { goods }
   }
 }
 </script>

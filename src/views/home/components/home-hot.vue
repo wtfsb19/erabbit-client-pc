@@ -1,6 +1,6 @@
 <template>
   <HomePanel title="人气推荐" sub-title="人气爆款 不容错过">
-    <div style="position: relative;height: 426px;">
+    <div ref="target" style="position: relative;height: 426px;">
       <Transition name="fade">
         <ul v-if="goods.length" ref="pannel" class="goods-list">
           <li v-for="item in goods" :key="item.id">
@@ -18,10 +18,11 @@
 </template>
 
 <script>
-import { ref, onMounted } from 'vue'
+// import { ref, onMounted } from 'vue'
 import HomePanel from './home-panel'
 import { findHot } from '@/api/home'
 import HomeSkeleton from '@/views/home/components/home-skeleton.vue'
+import { useLazyLoad } from '@/hooks'
 
 export default {
   name: 'HomeNew',
@@ -30,15 +31,23 @@ export default {
     HomeSkeleton
   },
   setup () {
-    const goods = ref([])
-    const getHotList = async () => {
-      const res = await findHot()
-      goods.value = res.result
+    // const goods = ref([])
+    // const getHotList = async () => {
+    //   const res = await findHot()
+    //   goods.value = res.result
+    // }
+    // onMounted(() => {
+    //   getHotList()
+    // })
+    const {
+      target,
+      result
+    } = useLazyLoad(findHot)
+
+    return {
+      goods: result,
+      target
     }
-    onMounted(() => {
-      getHotList()
-    })
-    return { goods }
   }
 }
 </script>
