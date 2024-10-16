@@ -105,7 +105,7 @@ export default {
     onMounted(async () => {
       const res = await findBrand(6)
       brand.brands = res.result
-      console.log(brand.brands)
+      // console.log(brand.brands)
     })
 
     return {
