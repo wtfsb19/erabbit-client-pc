@@ -1,8 +1,9 @@
 // vue3.0插件写法要素：导出一个对象，有install函数，默认传入了app应用实例，app基础之上扩展
-
+import {useIntersectionObserver} from '@vueuse/core'
 import XtxSkeleton from '@/components/library/xtx-skeleton.vue'
 import XtxCarousel from '@/components/library/xtx-carousel.vue'
 import XtxMore from '@/components/library/xtx-more.vue'
+
 
 export const componentPlugin = {
   install (app) {
@@ -13,5 +14,25 @@ export const componentPlugin = {
     app.component(XtxSkeleton.name, XtxSkeleton)
     app.component(XtxCarousel.name, XtxCarousel)
     app.component(XtxMore.name, XtxMore)
+
+    // 定义指令
+    app.directive('lazyload', {
+            mounted(el, binding) {
+                // el: 指令绑定的那个元素 img
+                // binding: binding.value  指令等于号后面绑定的表达式的值  图片url
+                // console.log(el, binding.value)
+                const {stop} = useIntersectionObserver(
+                    el,
+                    ([{isIntersecting}]) => {
+                        if (isIntersecting) {
+                            // 进入视口区域
+                            el.src = binding.value
+                            // 图片加载，停止监听
+                            stop()
+                        }
+                    },
+                )
+            }
+        })
   }
 }
