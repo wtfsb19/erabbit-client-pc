@@ -3,6 +3,8 @@ import {useIntersectionObserver} from '@vueuse/core'
 import XtxSkeleton from '@/components/library/xtx-skeleton.vue'
 import XtxCarousel from '@/components/library/xtx-carousel.vue'
 import XtxMore from '@/components/library/xtx-more.vue'
+import XtxBread from '@/components/library/xtx-bread.vue'
+import XtxBreadItem from '@/components/library/xtx-bread-item.vue'
 
 
 export const componentPlugin = {
@@ -14,6 +16,8 @@ export const componentPlugin = {
     app.component(XtxSkeleton.name, XtxSkeleton)
     app.component(XtxCarousel.name, XtxCarousel)
     app.component(XtxMore.name, XtxMore)
+    app.component(XtxBread.name, XtxBread)
+    app.component(XtxBreadItem.name, XtxBreadItem)
 
     // 定义指令
     app.directive('lazyload', {
