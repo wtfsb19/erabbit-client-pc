@@ -22,6 +22,7 @@ export default {
         dymanicItems.push(h('i', { class: 'iconfont icon-angle-right' }))
       }
     })
+    console.log(dymanicItems)
     return h('div', { class: 'xtx-bread' }, dymanicItems)
   }
 }
